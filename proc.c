@@ -428,6 +428,24 @@ kill(int pid)
   return -1;
 }
 
+int pcount(void){
+
+ struct proc *p;
+ 
+  int p_count;
+  p_count = 0; 
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state == SLEEPING || p->state == RUNNABLE || p->state == RUNNING ){
+		p_count++; 
+   }
+  }
+  release(&ptable.lock);
+  return p_count; 
+ 
+}
+
+
 //PAGEBREAK: 36
 // Print a process listing to console.  For debugging.
 // Runs when user types ^P on console.

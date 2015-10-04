@@ -43,6 +43,12 @@ sys_getpid(void)
 }
 
 int
+sys_pcount(void)
+{
+  return pcount();
+}
+
+int
 sys_sbrk(void)
 {
   int addr;
